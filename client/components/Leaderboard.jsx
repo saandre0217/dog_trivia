@@ -1,6 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
+import Leader from './Leader.jsx';
 
 function LeaderBoard() {
   const [leaders, setLeaders] = useState([]);
@@ -14,9 +16,14 @@ function LeaderBoard() {
   }
   return (
     <div>
-      {console.log(leaders)}
       Leaderboard
       <Button onClick={() => getLeaders('smartest')}>Smartest Parents</Button>
+      {leaders.map((leaderObj) => (
+        <Leader
+          leader={leaderObj}
+          key={leaderObj._id}
+        />
+      ))}
     </div>
   );
 }
