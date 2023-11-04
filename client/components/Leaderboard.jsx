@@ -8,8 +8,8 @@ import Leader from './Leader.jsx';
 function LeaderBoard() {
   const [leaders, setLeaders] = useState([]);
 
-  function getLeaders(endpoint) {
-    axios.get(`/leaderboard/${endpoint}`)
+  function getLeaders(type) {
+    axios.get(`/leaderboard/${type}`)
       .then(({ data }) => {
         setLeaders(data); // sets leaders to data property from User query obj
       })
@@ -18,13 +18,14 @@ function LeaderBoard() {
 
   // leader board defaults to smartest parents on rendering
   useEffect(() => {
-    getLeaders('smartest');
+    if (leaders.length === 0) { getLeaders('smartest'); }
   });
 
   return (
     <div>
       <h2>Leader Board</h2>
       <Button onClick={() => getLeaders('smartest')}>Smartest Parents</Button>
+      <Button onClick={() => getLeaders('richest')}>Richest Parents</Button>
       <Table className="table">
         <thead className="leader-table">
           <tr>

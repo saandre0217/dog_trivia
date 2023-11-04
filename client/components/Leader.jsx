@@ -7,7 +7,7 @@ function Leader(props) {
     <tbody>
       <tr>
         <th scope="row" className="leader-info">{`${props.leader.username} `}</th>
-        <th scope="row" className="leader-info">{`${props.leader.questionCount} `}</th>
+        <th scope="row" className="leader-info">{`${props.leader.coinCount} `}</th>
       </tr>
     </tbody>
 
