@@ -1,10 +1,16 @@
 import React from 'react';
+import Table from 'react-bootstrap/Table';
 
 function Leader(props) {
   return (
-    <div>
-      {props.leader.username}
-    </div>
+
+    <tbody>
+      <tr>
+        <th scope="row" className="leader-info">{`${props.leader.username} `}</th>
+        <th scope="row" className="leader-info">{`${props.leader.questionCount} `}</th>
+      </tr>
+    </tbody>
+
   );
 }
 export default Leader;

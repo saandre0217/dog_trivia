@@ -1,7 +1,8 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 import Leader from './Leader.jsx';
 
 function LeaderBoard() {
@@ -14,16 +15,32 @@ function LeaderBoard() {
       })
       .catch((err) => console.error('getLeaders ERROR (client):', err));
   }
+
+  // leader board defaults to smartest parents on rendering
+  useEffect(() => {
+    getLeaders('smartest');
+  });
+
   return (
     <div>
-      Leaderboard
+      <h2>Leader Board</h2>
       <Button onClick={() => getLeaders('smartest')}>Smartest Parents</Button>
-      {leaders.map((leaderObj) => (
-        <Leader
-          leader={leaderObj}
-          key={leaderObj._id}
-        />
-      ))}
+      <Table className="table">
+        <thead className="leader-table">
+          <tr>
+            <th scope="col" className="header-name">Username</th>
+            <th scope="col" className="header-name"># Correct Q</th>
+          </tr>
+        </thead>
+
+        {leaders.map((leaderObj) => (
+          <Leader
+            leader={leaderObj}
+            key={leaderObj._id}
+          />
+        ))}
+
+      </Table>
     </div>
   );
 }
