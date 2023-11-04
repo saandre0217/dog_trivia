@@ -29,6 +29,20 @@ const testFunc = () => {
 };
 // testFunc();
 
+// GET to '/leaderboard/smartest' should get 5 users w the highest questionCount
+app.get('/leaderboard/smartest', (req, res) => User.find({}, null, { limit: 5 }).sort({ questionCount: -1 })
+  .then((users) => {
+    if (users) {
+      res.status(200).send(users);
+    } else {
+      res.sendStatus(404);
+    }
+  })
+  .catch((err) => {
+    console.error('get LB/smartest ERROR (server):', err);
+    res.sendStatus(500);
+  }));
+
 app.listen(port, () => {
   console.log(`
   Listening at: http://127.0.0.1:${port}
